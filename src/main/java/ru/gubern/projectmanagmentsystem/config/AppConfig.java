@@ -1,6 +1,7 @@
 package ru.gubern.projectmanagmentsystem.config;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.integration.IntegrationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,5 +57,10 @@ public class AppConfig {
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    ModelMapper modelMapper(){
+        return new ModelMapper();
     }
 }
