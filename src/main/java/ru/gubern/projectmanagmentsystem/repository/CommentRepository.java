@@ -2,12 +2,12 @@ package ru.gubern.projectmanagmentsystem.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.gubern.projectmanagmentsystem.models.Issue;
+import ru.gubern.projectmanagmentsystem.models.Comment;
 
 import java.util.List;
 
 @Repository
-public interface IssueRepository extends JpaRepository<Issue,Long> {
+public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    public List<Issue> findByProjectID(Long id);
+    List<Comment> findByIssueId(Long issueId);
 }

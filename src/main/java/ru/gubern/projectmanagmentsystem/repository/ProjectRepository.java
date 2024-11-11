@@ -3,11 +3,13 @@ package ru.gubern.projectmanagmentsystem.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import ru.gubern.projectmanagmentsystem.models.Project;
 import ru.gubern.projectmanagmentsystem.models.User;
 
 import java.util.List;
 
+@Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     //List<Project> findByOwner(User user);
