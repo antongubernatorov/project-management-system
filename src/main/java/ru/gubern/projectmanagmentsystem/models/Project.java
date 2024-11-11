@@ -34,4 +34,7 @@ public class Project {
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Issue> issues = new ArrayList<>();
+
+    @ManyToMany
+    private List<User> team = new ArrayList<>();
 }
