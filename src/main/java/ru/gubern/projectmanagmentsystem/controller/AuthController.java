@@ -18,6 +18,7 @@ import ru.gubern.projectmanagmentsystem.repository.UserRepository;
 import ru.gubern.projectmanagmentsystem.request.LoginRequest;
 import ru.gubern.projectmanagmentsystem.response.AuthResponse;
 import ru.gubern.projectmanagmentsystem.service.CustomerUserDetailsImpl;
+import ru.gubern.projectmanagmentsystem.service.SubscriptionService;
 
 @RestController
 @RequestMapping("/auth")
@@ -27,11 +28,13 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
 
     private final CustomerUserDetailsImpl customerUserDetails;
+    private SubscriptionService subscriptionService;
 
-    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder, CustomerUserDetailsImpl customerUserDetails) {
+    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder, CustomerUserDetailsImpl customerUserDetails, SubscriptionService subscriptionService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.customerUserDetails = customerUserDetails;
+        this.subscriptionService = subscriptionService;
     }
 
     @PostMapping("/signup")
@@ -48,6 +51,8 @@ public class AuthController {
         createdUser.setFullName(user.getFullName());
 
         User savedUser = userRepository.save(createdUser);
+
+        subscriptionService.createSubscription(savedUser);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
